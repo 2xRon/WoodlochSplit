@@ -55,7 +55,7 @@ def solve(expenditures):
     return target, list(t for t in transactions if t[0] != "EXCESS" and t[1] != "EXCESS")
 
 if __name__ == "__main__":
-    participants = {"A":1100, "B":1100, "C":250, "D":71, "E":103, "F":240}
+    participants = {"A":1100, "B":1101, "C":250, "D":71, "E":103, "F":240}
     target, transactions = solve(participants)
     print(f"After all transfers, everyone will have spent ${round(float(target),2)}")
     print("Transactions\n------------------")
