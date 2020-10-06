@@ -50,14 +50,14 @@ def solve(expenditures):
     getcontext().prec = 28
     target = Decimal(sum(expenditures.values()) / len(expenditures))
     net_expenditure = {k:Decimal(v-target) for k,v in expenditures.items()}
-    net_expenditure.update({"EXCESS":Decimal(-1  * sum(net_expenditure.values()))})
+    net_expenditure.update({"__EXCESS":Decimal(-1  * sum(net_expenditure.values()))})
     transactions = chain(*(subgroup_transfers(grp_debts) for grp_debts in most_zero_sum_partitions(net_expenditure)))
-    return target, list(t for t in transactions if t[0] != "EXCESS" and t[1] != "EXCESS")
+    return target, list(t for t in transactions if t[0] != "__EXCESS" and t[1] != "__EXCESS")
 
 if __name__ == "__main__":
-    participants = {"A":1100, "B":1101, "C":250, "D":71, "E":103, "F":240}
+    participants = {"A":125, "B":123, "C":141, "D":90, "E":89, "F":35}
     target, transactions = solve(participants)
-    print(f"After all transfers, everyone will have spent ${round(float(target),2)}")
+    print(f"After all transfers, everyone will have spent ${round(float(target),2):.2f}")
     print("Transactions\n------------------")
     for t in transactions:
-        print(f"{t[0]} transfers ${round(float(t[2]),2)} to {t[1]}")
+        print(f"{t[0]} transfers ${round(float(t[2]),2):.2f} to {t[1]}")
